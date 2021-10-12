@@ -1,24 +1,22 @@
 package middleware
 
 import (
-	"fenng-web/framework"
+	"fenny-web/framework/gin"
 	"fmt"
 )
 
-func Test1() framework.ControllerHandler {
-	return func(ctx *framework.Context) error {
+func Test1() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
 		fmt.Println("middleware pre test1")
 		ctx.Next()
 		fmt.Println("middleware post test1")
-		return nil
 	}
 }
 
-func Test2() framework.ControllerHandler {
-	return func(ctx *framework.Context) error {
+func Test2() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
 		fmt.Println("middleware pre test2")
 		ctx.Next()
 		fmt.Println("middleware post test2")
-		return nil
 	}
 }

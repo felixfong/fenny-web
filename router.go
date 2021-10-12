@@ -1,17 +1,18 @@
 package main
 
 import (
-	"fenng-web/framework"
-	"fenng-web/framework/middleware"
+	"fenny-web/framework/gin"
+	"fenny-web/framework/middleware"
 )
 
-func registerRouter(core *framework.Core) {
-	core.Use(
-			middleware.Test1(),
-			middleware.Test2(), FooControllerHandler)
+func registerRouter(core *gin.Engine) {
+	core.GET("/user/login", middleware.Test1(), UserLoginController)
 
 	subjectApi := core.Group("/subject")
 	{
-		subjectApi.Use(middleware.Test1(), SubjectListController)
+		subjectApi.Use(middleware.Test1())
+		// 动态路由
+		subjectApi.GET("/:id", SubjectListController)
+		subjectApi.PUT("/:id", SubjectListController)
 	}
 }

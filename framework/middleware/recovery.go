@@ -1,16 +1,16 @@
 package middleware
 
-import "fenng-web/framework"
+import (
+	"fenny-web/framework/gin"
+)
 
-func Recovery() framework.ControllerHandler {
-	return func(ctx *framework.Context) error {
+func Recovery() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
 		defer func() {
 			if p := recover(); p != nil {
-				ctx.Json(500, p)
+				ctx.JSON(500, p)
 			}
 		}()
 		ctx.Next()
-
-		return nil
 	}
 }
